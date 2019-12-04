@@ -1,2 +1,11 @@
-# leetcode
-leetcode_solution
+## leetcode
+
++ 7.Reverse Integer
+
+  最直接的想法是字符串翻转，可以利用python字符串切片直接完成翻转：
+  ```
+  str = str[::-1]
+  ```
+  但是注意完成转换后需要判断是否溢出. 32-bit signed integer range: [−2^31,  2^31 − 1].利用左移可以直接设置上限2^31 - 1 / 2^31 
+
+  也可直接进行翻转，但是，python存储数字理论上是无限长度，每次计算好要判断是否溢出。Python的坑： 由于Python的 // 操作是向下取整，导致正负数取余 % 操作结果不一致，因此需要将原数字转为正数操作。
