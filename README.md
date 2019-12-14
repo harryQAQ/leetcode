@@ -32,9 +32,38 @@
 
     string去空格，strip(),去左空格lstrip()
 
+    python一行解法 正则表达式 还是强啊...
+
+    ```
+    class Solution:
+    def myAtoi(self, s: str) -> int:
+        return max(min(int(*re.findall('^[\+\-]?\d+', s.lstrip())), 2**31 - 1), -2**31)
+
+    ```  
+
+    ```
+    ^：匹配字符串开头
+    [\+\-]：代表一个+字符或-字符
+    ?：前面一个字符可有可无
+    \d：一个数字
+    +：前面一个字符的一个或多个
+    \D：一个非数字字符
+    *：前面一个字符的0个或多个
+    ```
+
+
+    ```
+    max(min(数字, 1<<31 - 1), -1<<31) #用来防止结果越界
+    ```
+
 + 9.Palindrome Number
 
     数字<0，有负号肯定不满足，正数利用字符串切片逆转下判断是否相同即可
+
+
++ 13.Roman to Integer
+
+    建立map后，逆着读取字符串，若本位比上位小，就减去该位，否则加上该位。
 
 + 24.Swap Nodes in Pairs
 
