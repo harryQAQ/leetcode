@@ -88,3 +88,22 @@
     关于递归法翻转链表，推荐一个分析，很清晰：[步步拆解：如何递归地反转链表的一部分](https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/bu-bu-chai-jie-ru-he-di-gui-di-fan-zhuan-lian-biao/) 
 
      分析递归算法的时候，不要跳进递归（你的脑袋能压几个栈呀？），而是要根据函数定义，来弄清楚这段代码会产生什么结果。
+
++ 230.Kth Smallest Element in a BST
+
+    利用python生成器，在中序递归的时候利用生成器存储中序结果。
+
+    ```
+    yield from some_generator
+    ```
+    相当于
+
+    ```
+    for x in some_generator: 
+        yield x
+    ```
+
+
++ 739.Daily Temperatures
+
+    利用单调栈（Monotone Stack），每个数字只进栈并处理一次，而解决问题的核心就在处理这块，当前数字如果破坏了单调性，就会触发处理栈顶元素的操作，而触发数字有时候是解决问题的一部分。
