@@ -3,7 +3,7 @@ class Solution:
         res = True
         a = set(s)
         b = set(t)
-
+        
         if a == b:
             for i in a:
                 res = res and s.count(i) == t.count(i)
