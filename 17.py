@@ -1,14 +1,10 @@
 from typing import List
 
 class Solution:
-    
-
-
-
-
     def letterCombinations(self, digits: str) -> List[str]:
+        if not digits: return []
         #映射关系
-        mp = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxy']
+        mp = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
         res = []
         def dfs(tmpstr, idx):
             if idx == len(digits): #递归边界
