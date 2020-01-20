@@ -150,6 +150,15 @@
         yield x
     ```
 
++ 347.Top K Frequent Elements
+
+    获得前k个高频的元素，然后利用优先队列（堆）来实现排序即可。
+
+    在Python中可以使用 heapq库中的nlargest方法，一行解决。
+
+    在Python中：collections 库中的Counter方法，用来 构建我们所需要的元素对应频次的哈希表。
+
+
 
 
 
