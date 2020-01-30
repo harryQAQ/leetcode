@@ -126,7 +126,9 @@
 
 + 24.Swap Nodes in Pairs
 
-    看25题升级版吧
+    为了速度可以不用递归，采用迭代的方法，为了保持第一个部分和后面的一致性，先添加一个空头，再进行交换。
+
+    比较经典的题目
 
 + 25.Reverse Nodes in k-Group
   
@@ -135,6 +137,16 @@
     关于递归法翻转链表，推荐一个分析，很清晰：[步步拆解：如何递归地反转链表的一部分](https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/bu-bu-chai-jie-ru-he-di-gui-di-fan-zhuan-lian-biao/) 
 
      分析递归算法的时候，不要跳进递归（你的脑袋能压几个栈呀？），而是要根据函数定义，来弄清楚这段代码会产生什么结果。
+
++ 141.Linked List Cycle
+
+    链表判环
+
+    方法一、将链表每个结点的地址存在set中，遍历判断是否在set中出现，若出现则有环
+
+    方法二、快慢指针，设置一个快指针每次前进两步，一个慢指针每次前进一步，一直循环，若相遇则有环，可以想象成在操场（环状）两个跑步速度不一样的人总会相遇
+
+    方法三、置空，每次遍历都把经过的结点val值置空
 
 + 230.Kth Smallest Element in a BST
 
