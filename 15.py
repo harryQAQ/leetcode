@@ -13,10 +13,10 @@ class Solution:
                     j -= 1
                 else:
                     res.append([nums[k], nums[i], nums[j]])
-                    i += 1
-                    j -= 1
                     while i < j and nums[i] == nums[i - 1]: i += 1
                     while i < j and nums[j] == nums[j + 1]: j -= 1
+                    i += 1
+                    j -= 1
         return res
 
 x = Solution()
