@@ -1,4 +1,5 @@
 ## leetcode
+
 + 1.Two Sum
 
     python中的hashmap用字典实现，可以用get方法获取key对应的value，用is not None判断是否在hashmap中. PS:用in/not in来判断是否在list中。list获取特定元素的索引：nums.index(item)
@@ -121,7 +122,13 @@
 
     写好递归边界后，考虑最外层的逻辑，写好后debug一下一般问题不大了。
 
-    ord(c)-48 是获取c的ASCII码然后-48,48是0的ASCII
+    tips:ord(c) - 48 是获取c的ASCII码然后-48,48是0的ASCII
+
++ 20.Valid Parentheses
+
+    典型的栈的题目，python实现stack用list即可，可以append和pop
+
+    用一个hashmap存储右括号对应的左括号可以提高速度。
 
 
 + 24.Swap Nodes in Pairs
@@ -138,15 +145,42 @@
 
      分析递归算法的时候，不要跳进递归（你的脑袋能压几个栈呀？），而是要根据函数定义，来弄清楚这段代码会产生什么结果。
 
++ 98.Validate Binary Search Tree
+
+    二叉搜索树中序遍历是递增的,所以我们可以中序遍历判断前一数是否小于后一个数.
+
+    法一：把中序结果保存在list中，判断排序后的list和原本的list是否一样。另外！第一遍不通过原因是没有加上：判断无重复元素，可以利用len(set(res)) == len(res) 实现
+
+    法二：在进行中序时，利用前置指针来判断值的大小顺序是否满足条件！不能想当然的判断当前根的值和左子树右子树的值，要用一个前置指针保存前一个结点。整体中序的框架不变，在处理根时，把pre更新为当前结点即可
+
+    法三：利用最大最小值
+
+    Python中可以用如下方式表示正负无穷：float("inf"), float("-inf")
+
+
 + 141.Linked List Cycle
 
     链表判环
 
-    方法一、将链表每个结点的地址存在set中，遍历判断是否在set中出现，若出现则有环
+    方法一：将链表每个结点的地址存在set中，遍历判断是否在set中出现，若出现则有环
 
-    方法二、快慢指针，设置一个快指针每次前进两步，一个慢指针每次前进一步，一直循环，若相遇则有环，可以想象成在操场（环状）两个跑步速度不一样的人总会相遇
+    方法二：快慢指针，设置一个快指针每次前进两步，一个慢指针每次前进一步，一直循环，若相遇则有环，可以想象成在操场（环状）两个跑步速度不一样的人总会相遇
 
-    方法三、置空，每次遍历都把经过的结点val值置空
+    方法三：置空，每次遍历都把经过的结点val值置空
+
+
++ 225.Implement Stack using Queues
+
+    用队列实现栈，用标准库queue中的Queue实现，get(),put()方法是常用的。
+
++ 239.Sliding Window Maximum
+
+    法一：大顶堆
+
+    法二：双端队列维护，始终保证双端队列最左边是滑窗中最大的。
+
+    python实现deque 可以用list,左侧pop，用pop(0),右侧用pop()。也可以用collections库里面的deque,用popleft(),和pop()
+
 
 + 230.Kth Smallest Element in a BST
 
@@ -162,6 +196,11 @@
         yield x
     ```
 
+
++ 232.Implement Queue using Stacks
+
+    用栈实现队列，用两个栈即可，在__init__中初始化两个栈
+
 + 347.Top K Frequent Elements
 
     获得前k个高频的元素，然后利用优先队列（堆）来实现排序即可。
@@ -172,7 +211,23 @@
 
 
 
++ 703.Kth Largest Element in a Stream
 
+
+    堆（heap），它是一种优先队列。优先队列让你能够以任意顺序添加对象，并随时（可能是在两次添加对象之间）找出（并删除）最小的元素。相比于列表方法min，这样做的效率要高得多。
+    
+    实际上，Python没有独立的堆类型，而只有一个包含一些堆操作函数的模块。这个模块名为heapq（其中的q表示队列），它包含6个函数，其中前4个与堆操作直接相关。必须使用列表来表示堆对象本身。
+
+    
+    | heapq常用方法 |  | 
+    | ------ | ------ |
+    | 函数 | 描述 | 
+    | heappush(heap, x)    | 将x压入堆中 | 
+    | heappop(heap)        | 从堆中弹出最小的元素 | 
+    | heapify(heap)        | 让列表具备堆特征 | 
+    | heapreplace(heap, x) | 弹出最小的元素，并将x压入堆中 | 
+    | nlargest(n, iter)    | 返回iter中n个最大的元素 | 
+    | nsmallest(n, iter)   | 返回iter中n个最小的元素 | 
 
 + 739.Daily Temperatures
 
