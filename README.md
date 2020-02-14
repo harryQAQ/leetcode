@@ -148,6 +148,10 @@
     设计递归算法时，首先要先明确该函数的作用，然后再确定何时结束与何时调用该函数。
 
 
++ 35.Search Insert Position
+
+    参照69题题解里面的链接，当num[mid] < target 的时候一定不可能满足条件.
+
 + 36.Valid Sudoku
 
     判断 数独是否有效，判断三个条件可以放在一个循环里完成。
@@ -181,6 +185,26 @@
     一个是设定一个全局的temp与res,temp用来记录当前的搜索路径，当试图进入某一分支时要将当前的结点选择添加进temp，而当分支结束要将其弹出。当temp是一个正确答案时，保存进res。
 
     另一个是把路径(如list，数组，vecto等)当做函数参数，可以不用每次压入弹出。
+
++ 69.Sqrt(x)
+
+    法一：二分查找
+
+    在讨论区看到一个大佬总结了一个二分的模板，很强，传送门：[二分模板讲解](https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/)
+    
+    总结一下几点：
+    
+    1.循环条件写left < right, 这样就不用担心返回结果是l还是r了。
+
+    2.写if-else判断，去思考nums[mid]满足什么性质的时候，mid 不是解。进而接着判断 mid 的左边有没有可能是解，mid 的右边有没有可能是解。此时 mid 作为待查找数组就分为两个区间，一个部分可能存在目标元素，一个部分一定不存在目标元素，mid 作为这两个区间的分界点。
+
+    3.当赋值为left = mid时，需要调整为取右中位数。
+
+    搜索范围可以通过一些数学关系去缩小，但是注意一般设置大一点点，避免边界查不到
+
+    法二：牛顿法
+
+    思想是以直代曲，求方程的根
 
 + 98.Validate Binary Search Tree
 
@@ -235,6 +259,16 @@
     法二：hashmap记录次数，若次数>n//2返回。
 
     法三：摩尔投票法，核心思想是抵消
+
++ 208.Implement Trie (Prefix Tree)
+
+    py可以用dict来实现字典树。
+
+    Python中collections.defaultdict()可以更加方便的去实现dict。
+
+    举个例子，在初始化一个dict的时候，普通dict假如不存在键，想插入值，就会报错。
+
+    defaultdict()的参数可以是list, set, int, 甚至是自己创建的类以实现不同功能。默认在缺失键的情况下初始化什么样的值。
 
 + 225.Implement Stack using Queues
 
