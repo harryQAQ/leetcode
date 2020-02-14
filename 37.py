@@ -28,15 +28,15 @@ class Solution:
             i, j = need_fill[count] #获取当前的位置
             box_id = (i // 3) * 3 + j // 3
             for tmp_num in row[i] & col[j] & block[box_id]: #填啥数字
-                row[i].remove(now_val)
-                col[j].remove(now_val)
-                block[box_id].remove(now_val)
+                row[i].remove(tmp_num)
+                col[j].remove(tmp_num)
+                block[box_id].remove(tmp_num)
                 board[i][j] = str(tmp_num)
                 if dfs(count + 1):
                     return True
-                row[i].add(now_val)
-                col[j].add(now_val)
-                block[box_id].add(now_val)
+                row[i].add(tmp_num)
+                col[j].add(tmp_num)
+                block[box_id].add(tmp_num)
             return False #如果所有for循环都递归好了还没有return True 说明无解 
         dfs(0)
 
