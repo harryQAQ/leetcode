@@ -1,5 +1,6 @@
 import collections
 #先定义字典树的每一层的结点
+#用dict实现是因为，每一层的字母需要映射下一层的结点
 class TrieNode:
     def __init__(self):
         """
@@ -22,7 +23,7 @@ class Trie:
         """
         current_node = self.root
         for s in word:
-            current_node = current_node.children[s] #若不存在会自动生成下一层的dict
+            current_node = current_node.children[s] #若存在会返回dict的映射，若不存在会自动生成下一层的dict
         current_node.is_word = True
         
 
