@@ -206,6 +206,14 @@
 
     思想是以直代曲，求方程的根
 
++ 79.Word Search
+
+    先记录个问题，python中变量前面加self.和不加的区别。self就表示实例对象，变量加了self.就是成员变量(属性)，可以由类的实例调用，如果不加就代表是方法的局部变量.
+
+    用dfs搜索结果，注意条件判断进行剪枝，避免不必要的搜索。记录是否visit的情况，可以开另一个数组来记录，也可以在访问的位置上
+
+    四连通在python中可以用list来记录。
+
 + 98.Validate Binary Search Tree
 
     二叉搜索树中序遍历是递增的,所以我们可以中序遍历判断前一数是否小于后一个数.
@@ -260,6 +268,10 @@
 
     法三：摩尔投票法，核心思想是抵消
 
++ 191.Number of 1 Bits
+
+    x & (x - 1)表示消掉 x的最后一位1！！！！！！！一直消直到为0 记录次数。
+
 + 208.Implement Trie (Prefix Tree)
 
     py可以用dict来实现字典树。
@@ -269,6 +281,12 @@
     举个例子，在初始化一个dict的时候，普通dict假如不存在键，想插入值，就会报错。
 
     defaultdict()的参数可以是list, set, int, 甚至是自己创建的类以实现不同功能。默认在缺失键的情况下初始化什么样的值。
+
++ 212.Word Search II
+
+    用字典树来优化时间复杂度。
+
+    把所有待查询的words保存进字典树中，根据当前字典树dict映射的字符，来判断是否进下一层递归。
 
 + 225.Implement Stack using Queues
 
@@ -297,10 +315,23 @@
         yield x
     ```
 
++ 231.Power of Two
+
+    满足1.x只有一位1，2.x>0。
+
+    x & (x - 1)表示消掉 x的最后一位1！！！！！！！！！！
+
+
 
 + 232.Implement Queue using Stacks
 
     用栈实现队列，用两个栈即可，在__init__中初始化两个栈
+
++ 338.Counting Bits
+
+    x & (x - 1)表示消掉 x的最后一位1!
+
+    递推关系: dp[i] = dp [i & (i - 1)] + 1
 
 + 347.Top K Frequent Elements
 
