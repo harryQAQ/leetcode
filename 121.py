@@ -2,8 +2,9 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        K = 1 #当前交易次数
+        K = 1 #最大交易次数
         n = len(prices)
+        #如果K很大，状态数组会非常大，内存会爆，其实当K大于序列一半时，就可以退化为无数次交易的情况了。
         if K >= n // 2:
             return self.greedy(prices)
 
