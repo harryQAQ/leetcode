@@ -13,7 +13,7 @@ class Solution:
         #这里要假定买入股票算一次交易完成，那么在初始化的时候要对两个状态进行初始化
         # 设置初始状态
         MP[0][1][1] = -prices[0]
-        for k in range(2, K+1):
+        for k in range(K+1):
             MP[0][k][1] = float('-inf')
         #由于假定 买入就算交易次数，任何一天，0次交易是不可能持股的
         for i in range(n):
