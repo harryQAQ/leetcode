@@ -214,6 +214,33 @@
 
     $F_n=1/\sqrt 5*[(\frac{1+\sqrt 5}{2})^n-(\frac{1-\sqrt 5}{2})^n]$
 
+
++ 72.Edit Distance
+
+    典型的动态规划解决字符串问题，解决两个字符串的动态规划问题，一般都是用两个指针 i,j 分别指向两个字符串的最后，然后一步步往前走，缩小问题的规模。
+    
+    dp[i][j] 代表 word1 到 i 位置转换成 word2 到 j 位置需要最少步数.
+
+    在草稿纸上画出二维数组，这样可以更加直观的来初始化，初始化第0行和第0列。
+
+    当 word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]；
+
+    当 word1[i] != word2[j]，dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
+
+    其中，dp[i-1][j-1] 表示替换操作，dp[i-1][j] 表示删除操作，dp[i][j-1] 表示插入操作。这里，具体表示什么可以举个例子然后用自然语言描述出来，如下：
+
+    以 word1 为 "horse"，word2 为 "ros"，且 dp[5][3] 为例，即要将 word1的前 5 个字符转换为 word2的前 3 个字符，也就是将 horse 转换为 ros，因此有：
+
+    (1) dp[i-1][j-1]，即先将 word1 的前 4 个字符 hors 转换为 word2 的前 2 个字符 ro，然后将第五个字符 word1[4]（因为下标基数以 0 开始） 由 e 替换为 s（即替换为 word2 的第三个字符，word2[2]）
+
+    (2) dp[i][j-1]，即先将 word1 的前 5 个字符 horse 转换为 word2 的前 2 个字符 ro，然后在末尾补充一个 s，即插入操作
+
+    (3) dp[i-1][j]，即先将 word1 的前 4 个字符 hors 转换为 word2 的前 3 个字符 ros，然后删除 word1 的第 5 个字符
+
+    这是两个个比较好的题解：[1.编辑距离面试题详解](https://leetcode-cn.com/problems/edit-distance/solution/bian-ji-ju-chi-mian-shi-ti-xiang-jie-by-labuladong/)
+
+    [2.自底向上 和自顶向下](https://leetcode-cn.com/problems/edit-distance/solution/zi-di-xiang-shang-he-zi-ding-xiang-xia-by-powcai-3/)
+
 + 79.Word Search
 
     先记录个问题，python中变量前面加self.和不加的区别。self就表示实例对象，变量加了self.就是成员变量(属性)，可以由类的实例调用，如果不加就代表是方法的局部变量.
@@ -263,6 +290,14 @@
 
     法二：dp，dp的思考方式要和递归相反，从底向上思考，容易去定义状态和状态转移方程。
 
++ 121.Best Time to Buy and Sell Stock
+
++ 122.Best Time to Buy and Sell Stock II   
+
++ 123.Best Time to Buy and Sell Stock III
+
+    以上三题均参照188
+
 + 141.Linked List Cycle
 
     链表判环
@@ -273,6 +308,12 @@
 
     方法三：置空，每次遍历都把经过的结点val值置空
 
++ 152.Maximum Product Subarray
+
+    动态规划，因为有负数的存在，需要保存当前位置的最大乘积，和最小乘积，因为负数可以将最大乘积变最小，将最小变最大。
+
+    可以扩展维数来存储状态，也可以直接用单个变量来记录，或者开一个2*2的循环数组来进行计算。
+
 
 + 169.Majority Element
 
@@ -281,6 +322,33 @@
     法二：hashmap记录次数，若次数>n//2返回。
 
     法三：摩尔投票法，核心思想是抵消
+
++ 188.Best Time to Buy and Sell Stock IV
+
+    当k足够大时，会内存超限，其实稍微想一下就可以明白：
+
+    当k >= len(prices) // 2时就可以将问题退化为无限次交易，采用贪心法解决。
+
+    在动态规划时，假如因为状态不够，而导致无法递推，就可以增加状态数组的维数。
+
+    本题用MP[i][k][j] 来作为状态，第一个是天数，第二个是交易次数，第三个是当前的持有状态。可以用自然语言描述出每一个状态的含义。
+
+    比如说 MP[3][2][1] 的含义就是：今天是第三天，我现在手上持有着股票，至今进行了 2 次交易。
+
+    本题还有一个坑，即交易次数的定义，是买入股票就算一次交易？还是卖出后才算一次交易？其实都是可以的，不同的定义方式会导致dp方程的不同，以及初始化的不同。
+
+    一般递推时可以把0空出，当做状态转移的开始。
+
+    本题如果假定买入就算一次交易，初始状态:
+    
+    MP[0][t][0] 0天t次交易，手上不持有：可能的 0
+
+    MP[0][t][1] 0天t次交易，手上持有：不可能，设为-inf，0天没有股票，不会持有
+
+    MP[i][0][0] i天0次交易，手上不持有：0
+
+    MP[i][0][1] i天0次交易，手上持有：不可能，只要持有就会有交易次数。
+
 
 + 191.Number of 1 Bits
 
@@ -341,6 +409,16 @@
 
     用栈实现队列，用两个栈即可，在__init__中初始化两个栈
 
++ 300.Longest Increasing Subsequence
+
+    定义状态为：选定当前元素的最大递增子序列
+
+    有时候状态不好定义，要加上选定当前位置
+
++ 332.Coin Change
+
+    可以等同为爬楼梯问题。
+
 + 338.Counting Bits
 
     x & (x - 1)表示消掉 x的最后一位1!
@@ -375,6 +453,46 @@
     | nlargest(n, iter)    | 返回iter中n个最大的元素 | 
     | nsmallest(n, iter)   | 返回iter中n个最小的元素 | 
 
++ 714.Best Time to Buy and Sell Stock with Transaction Fee
+
+    参考188题题解，两个维度的状态就可以了，dp方程加上手续费就OK了
+
 + 739.Daily Temperatures
 
     利用单调栈（Monotone Stack），每个数字只进栈并处理一次，而解决问题的核心就在处理这块，当前数字如果破坏了单调性，就会触发处理栈顶元素的操作，而触发数字有时候是解决问题的一部分。
+
++ 994.
+
+    采用BFS
+    以下是BFS的写法
+    ```
+    depth = 0 # 记录遍历到第几层
+    while queue 非空:
+        depth++
+        n = queue 中的元素个数
+        循环 n 次:
+            node = queue.pop()
+            for node 的所有相邻结点 m:
+                if m 未访问过:
+                    queue.push(m)
+    ```      
+
++ 1071.Greatest Common Divisor of Strings
+
+    如果它们有公因子 abc，那么 str1 就是 mm 个 abc 的重复，str2 是 nn 个 abc 的重复，连起来就是 m+nm+n 个 abc，好像 m+nm+n 个 abc 跟 n+mn+m 个 abc 是一样的。
+
+    所以如果 str1 + str2 === str2 + str1 就意味着有解。
+
+    我们也很容易想到 str1 + str2 !== str2 + str1 也是无解的充要条件。
+
+    当确定有解的情况下，最优解是长度为 gcd(str1.length, str2.length) 的字符串。
+
+
+
++ 1103.Distribute Candies to People
+
+    法一：模拟，用i%kids来表示当前到哪个小孩，记剩下的糖果，给的糖果始终是min（剩下的糖果，当前次数 + 1）
+
+    法二：数学推导，用 等差数列来推导，详细见：[详细解释数学方法怎么做，高中知识就能看懂哦](https://leetcode-cn.com/problems/distribute-candies-to-people/solution/xiang-xi-jie-shi-shu-xue-fang-fa-zen-yao-zuo-gao-z/)
+    写的很好
+    
