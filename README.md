@@ -130,6 +130,11 @@
 
     用一个hashmap存储右括号对应的左括号可以提高速度。
 
++ 21.Merge Two Sorted Lists
+
+    迭代和递归两种方法。
+
+    递归：比较当前的结点大小，然后递归调用本身即可。
 
 + 24.Swap Nodes in Pairs
 

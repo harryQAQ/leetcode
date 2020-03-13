@@ -12,7 +12,7 @@ class Solution:
         rows, cols = p // n, p % n
 
         res = [0] * n
-        for i in range(rows):
+        for i in range(n):
             res[i] = (i + 1) * rows + int(rows * (rows - 1) * 0.5) * n
 
             # 最后一轮or在p<n时的第一轮
