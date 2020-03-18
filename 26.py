@@ -7,7 +7,7 @@ class Solution:
         p = 1
         #i指针用来遍历
         for i in range(1, len(nums)):
-            if nums[i] == nums[i - 1]:
+            if nums[i] != nums[i - 1]:
                 nums[p] = nums[i]
                 p += 1
         return p
