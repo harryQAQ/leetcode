@@ -19,7 +19,7 @@ class Solution:
                 left += 1
                 right -= 1
             else:
-                return judge(s[left, right]) or judge(s[left + 1, right + 1])
+                return judge(s[left: right]) or judge(s[left + 1: right + 1])
         return True
 
 
