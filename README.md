@@ -152,6 +152,19 @@
 
     设计递归算法时，首先要先明确该函数的作用，然后再确定何时结束与何时调用该函数。
 
++ 26.删除排序数组中的重复项（双指针）
+
+    在题解中看到的很牛逼的双指针法，学习了。
+
+    题目要求统计数组中不同数字数量k；修改数组前k个元素为这些不同数字。
+    
+    算法流程：
+
+    第一个指针i： 由于数组已经完成排序，因此遍历数组，每遇到 nums[i] ！= nums[i - 1]，就说明遇到了新的不同数字，记录之；
+
+    第二个指针k： 每遇到新的不同数字时，执行 k += 1， k指针有两个作用：记录数组中不同数字的数量；作为修改数组元素的索引index。最终，返回k即可。
+
+
 
 + 35.Search Insert Position
 
@@ -218,6 +231,12 @@
     其实是斐波那契，可以用斐波那契求第n个的公式直接得出
 
     $F_n=1/\sqrt 5*[(\frac{1+\sqrt 5}{2})^n-(\frac{1-\sqrt 5}{2})^n]$
+
+    另外，要注意溢出问题，随着 n 增大, $f(n)$ 会超过 Int32 甚至 Int64 的取值范围，导致最终的返回值错误。
+
+    若使用python则不会溢出，可以最终直接取余
+
+
 
 
 + 72.Edit Distance
@@ -313,6 +332,10 @@
 
     方法三：置空，每次遍历都把经过的结点val值置空
 
++ 146.LRU缓存机制
+
+    python用ordereddict来实现，lru要让最近访问过的元素放置队列最前端，可以用ordereddict的move_to_end实现。
+
 + 152.Maximum Product Subarray
 
     动态规划，因为有负数的存在，需要保存当前位置的最大乘积，和最小乘积，因为负数可以将最大乘积变最小，将最小变最大。
@@ -362,6 +385,15 @@
 
     x & (x - 1)表示消掉 x的最后一位1！！！！！！！一直消直到为0 记录次数。
 
++ 200.number of islands
+
+    dfs，bfs都可以
+
+    对于这种连通性问题，可以采用并查集解决，python版本的并查集可以参考我github中的200题代码。
+
+    对于dfs，bfs,一个比较好的题解：[岛屿数量](https://leetcode-cn.com/problems/number-of-islands/solution/number-of-islands-shen-du-you-xian-bian-li-dfs-or-/)
+
+
 + 208.Implement Trie (Prefix Tree)
 
     py可以用dict来实现字典树。
@@ -377,6 +409,13 @@
     用字典树来优化时间复杂度。
 
     把所有待查询的words保存进字典树中，根据当前字典树dict映射的字符，来判断是否进下一层递归。
+
++ 223.Rectangle Area
+
+    先调整矩形的相对位置（只要保证第一个rec在第二个rec的左侧），然后判断是否不重合。不重合返回两个矩形面积和即可
+
+    画图根据规律判断得出 重合矩形的每个边的坐标即可。
+
 
 + 225.Implement Stack using Queues
 
@@ -441,7 +480,34 @@
 
     在Python中：collections 库中的Counter方法，用来 构建我们所需要的元素对应频次的哈希表。
 
++ 365.Water and Jug Problem
 
+    这里分别定义两个水壶为 A 和 B，定义有序整数对 (a, b) 表示当前 A 和 B 两个水壶的水量，它就是一个状态。
+
+    每次操作不外乎6种情况，y加满水/y排空水/x加满水/x排空水/y倒入x中(2 cases)/x倒入y中(2 cases)：
+    
+    y加满水：(cur_x,y); y排空水:(cur_x,0); x加满水:(x,cur_y).; x排空水:(0,cur_y).; 
+    
+    y倒入x中(2 cases):
+
+    假设倒入水的容量为V：则y中剩余：cur_y-V；x中拥有：cur_x+V;
+    
+    case1: 若倒完之后y还有剩余，说明x已满：V=x-cur_x, 故在这种情况下有:(x,cur_y+cur_x-x). 
+    
+    case2: 若倒完之后y空了，说明：V=cur_y, 故在这种情况下有:(cur_x+cur_y,0).
+
+    x倒入y中(2 cases):与上面情况相似，得到：
+    
+    case1: 若倒完之后x还有剩余:(cur_x+cur_y-y,y)
+    
+    case2: 若倒完之后x空了:(0,cur_x+cur_y)
+
+    这六种情况看做(cur_x, cur_y)的邻居顶点，故可以使用图的DFS/BFS搜索。
+
+
++ 547.朋友圈个数
+
+    并查集，对应位置为1，合并两个集合即可，py实现的并查集参考github代码
 
 + 703.Kth Largest Element in a Stream
 
@@ -469,10 +535,11 @@
 
     利用单调栈（Monotone Stack），每个数字只进栈并处理一次，而解决问题的核心就在处理这块，当前数字如果破坏了单调性，就会触发处理栈顶元素的操作，而触发数字有时候是解决问题的一部分。
 
-+ 994.
++ 994.Rotting Oranges
 
     采用BFS
     以下是BFS的写法
+
     ```
     depth = 0 # 记录遍历到第几层
     while queue 非空:
