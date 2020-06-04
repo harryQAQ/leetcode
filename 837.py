@@ -3,7 +3,7 @@ class Solution:
         dp = [None] * (K + W)
         tmp = 0
         for i in range(K, len(dp)):
-            dp[i] = 1 if i < N else 0
+            dp[i] = 1 if i <= N else 0
             tmp += dp[i]
         
         for i in range(K - 1, -1, -1):
