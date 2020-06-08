@@ -5,10 +5,15 @@ class Solution:
         for i in range(len(board)):
             if 'R' in board[i]:
                 x = i
-                y = board[i].index('R')
                 break
 
-        row = ''.join(board[x]).replace(',', '')
-        col = ''.join(i[x] for i in board).replace(',', '')
+        y = board[x].index('R')
+        row = ''.join(board[x]).replace('.', '')
+        col = ''.join(i[y] for i in board).replace('.', '')
 
-        return row.count('Rp') + row.count('pR') + col.count('Rp') + row.count('pR')
+        return row.count('Rp') + row.count('pR') + col.count('Rp') + col.count('pR')
+
+
+x = Solution()
+
+print(x.numRookCaptures([[".",".",".",".",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".","R",".",".",".","p"],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."]]))
