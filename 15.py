@@ -1,22 +1,31 @@
+from typing import List 
 class Solution:
-    def threeSum(self, nums: list) -> list:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
+        n = len(nums)
         res = []
-        for k in range(len(nums)):
-            if nums[k] > 0: break
-            if k > 0 and nums[k] == nums[k - 1]: continue
-            i, j = k + 1, len(nums) - 1
-            while i < j:
-                if nums[k] + nums[i] + nums[j] < 0:
-                    i += 1
-                elif nums[k] + nums[i] + nums[j] > 0:
-                    j -= 1
+        for i in range(n - 2):
+            #防止重复
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            if nums[i] + nums[i + 1] + nums[i + 2] > 0:
+                break
+            #max sum < 0 下一轮
+            if nums[i] + nums[n - 1] + nums[n - 2] < 0:
+                continue
+            left, right = i + 1, n - 1
+            while left < right:
+                tmp_sum = nums[i] + nums[left] + nums[right]
+                if tmp_sum == 0:
+                    res.append([nums[i], nums[left], nums[right]])
+                    while left < right and nums[left] == nums[left + 1]: left += 1
+                    while left < right and nums[right] == nums[right - 1]: right -= 1
+                    left += 1
+                    right -= 1
+                elif tmp_sum < 0:
+                    left += 1
                 else:
-                    res.append([nums[k], nums[i], nums[j]])
-                    while i < j and nums[i] == nums[i - 1]: i += 1
-                    while i < j and nums[j] == nums[j + 1]: j -= 1
-                    i += 1
-                    j -= 1
+                    right -= 1
         return res
 
 x = Solution()
