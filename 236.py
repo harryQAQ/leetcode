@@ -7,10 +7,9 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root or root == p or root == q:
+        if (not root) or root == p or root == q:
             return root
         l = self.lowestCommonAncestor(root.left, p, q)  
         r = self.lowestCommonAncestor(root.right, p, q)
         if l and r: return root
-        elif not l: return r      #返回的是右子树上的LCA，已解决子问题！！！
-        else: return l
+        return l if l else r
