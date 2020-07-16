@@ -21,14 +21,14 @@ class Solution{
                     if (visited[w] == visited[v]) {
                         return false;
                     }
-                    visited[w] = 
+                    if (visited[w] == 0){
+                        visited[w] = -visited[v];
+                        queue.offer(w);
+                    }
                 }
             }
 
         }
-
-
         return true;
-
     }
 }
