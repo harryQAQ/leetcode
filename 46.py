@@ -10,6 +10,8 @@ class Solution:
                 return
             visit[index] = True
             for i in range(len(nums)):
+                if nums[i] in tmp:
+                    continue
                 if not visit[i]:
                     tmp.append(nums[i])
                     dfs(i, size, tmp, visit, nums)
